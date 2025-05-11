@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="detail-main">
+   <div class="card1" style="width: 20rem;">
+
+      {% if property.image or property.images.all %}
+         <div class="card-image">
+         <div id="carousel-{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+               {% if property.image %}
+               <div class="carousel-item active">
+               <img src="{{property.image.url}}" class="img-fluid" alt="Main image">
+               </div>
+               {% endif %}
+
+               {% for i in property.images.all %}
+               <div class="carousel-item {% if not property.image and forloop.first %}active{% endif %}">
+               <img src="{{i.image.url}}" class="img-fluid" alt="Additional image">
+               </div>
+               {% endfor %}
+
+            </div>
+
+            <!-- Optional controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+            </button>
+         </div>
+         </div>
+      {% endif %}
+
+      <div class="category">{{property.title}} </div>
+      <div class="heading"> {{property.disc}}
+      </div>
+      <div>
+         <a href="{% url 'contact' %}"><button class="btn btn-info">Contact Us</button></a>
+      </div>
+   </div>
+</div>
+{% endblock content %}

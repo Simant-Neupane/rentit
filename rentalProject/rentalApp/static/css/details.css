@@ -1,0 +1,14 @@
+.detail-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.property-list{
+    margin: 30px;
+    margin-left: 50px;
+}
+#my-property{
+    padding: 20px;
+}

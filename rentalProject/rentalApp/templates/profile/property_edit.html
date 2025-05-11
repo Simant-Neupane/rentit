@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main_form">
+    <div class="form-container">
+        <p class="title">Upload your property</p>
+        <form method="post"  enctype="multipart/form-data" class="form">
+            {% csrf_token %}
+            {{form}}
+
+            <label for="id_images">Add more images:</label>
+            <input type="file" name="images" id="id_images" multiple>
+            <button class="sign">Upload</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

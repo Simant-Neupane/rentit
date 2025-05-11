@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="main">
+  <div>
+    <ul class="property-category">
+      {% if request.GET.perportyType %}
+      <li class="cate">
+        <a class="cate-button" href="?">All</a>
+      </li>
+      {% endif %}
+      {% for i in category %}
+      <li class="cate"><a class="cate-button" href="?perportyType={{i.id}}">{{i.title}}</a></li>
+      {% endfor %}
+      
+
+    </ul>
+  </div>
+    <h2 class="text-center pt-4">Porperties for Sale</h2>
+    <!-- From Uiverse.io by alexmaracinaru -->
+    <div class="ms-5 pt-3 pb-5 row">
+      {% for property in properties %}
+      {% if property.category.id == 2 %}
+      <div class="col-4 my-3">
+         <div class="card" style="width: 20rem;">
+          {% if property.image or property.images.all %}
+          <div class="card-image">
+          <div id="carousel-{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+             <div class="carousel-inner">
+
+                {% if property.image %}
+                <div class="carousel-item active">
+                <img src="{{property.image.url}}" class="img-fluid" alt="Main image">
+                </div>
+                {% endif %}
+
+                {% for i in property.images.all %}
+                <div class="carousel-item {% if not property.image and forloop.first %}active{% endif %}">
+                <img src="{{i.image.url}}" class="img-fluid" alt="Additional image">
+                </div>
+                {% endfor %}
+
+             </div>
+
+             <!-- Optional controls -->
+             <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+             </button>
+             <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+             </button>
+          </div>
+          </div>
+       {% endif %}
+            <div class="category">{{property.perportyType}} </div>
+            <div class="heading">
+               <span id="short-{{ property.id }}">
+                  {{ property.disc|slice:":10" }}...
+                  <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see more</a>
+               </span>
+            
+               <span id="full-{{ property.id }}" style="display: none;">
+                  {{ property.disc }}
+                  <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see less</a>
+               </span>
+            
+               <a href="{% url 'details' property.id %}">
+                  <div class="author">See more details</div>
+               </a>
+            </div>
+         </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <nav aria-label="Page navigation example">
+         <ul class="pagination">
+            {% if page_obj2.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page2={{page_obj2.previous_page_number}}#sale">Previous</a></li>
+            {% endif %}
+            {% for i in num2 %}
+            <li class="page-item"><a class="page-link" href="?page2={{i}}#sale">{{i}}</a></li>
+            {% endfor %}
+            {% if page_obj2.has_next %}
+            <li class="page-item"><a class="page-link" href="?page2={{page_obj2.next_page_number}}#sale">Next</a></li>
+            {% endif %}
+         </ul>
+      </nav>
+    </div>
+</div>
+<script>
+   function toggleDescription(id) {
+     const shortText = document.getElementById(`short-${id}`);
+     const fullText = document.getElementById(`full-${id}`);
+ 
+     if (shortText.style.display === 'none') {
+       shortText.style.display = 'inline';
+       fullText.style.display = 'none';
+     } else {
+       shortText.style.display = 'none';
+       fullText.style.display = 'inline';
+     }
+   }
+ </script>
+{% endblock content %}

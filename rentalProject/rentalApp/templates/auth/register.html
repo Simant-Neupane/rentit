@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css"/>
+
+    <!-- custom css link -->
+     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- From Uiverse.io by Yaya12085 --> 
+        <form class="form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <p class="title">Register </p>
+            <p class="message">Signup now and get full access to our app. </p>
+            <label for="mySelect">Choose your role:</label>
+            <select id="mySelect" name="mySelect" required>
+                <option value="" disabled selected>-- Select an option --</option>
+                <option value="Owner">An Owner</option>
+                <option value="Tenant">A Tenant</option>
+            </select>
+            <div class="flex ">
+                <label>
+                    <input required="" placeholder="" type="text" class="input" name="first_name">
+                    <span>Firstname</span>
+                </label>
+
+                <label>
+                    <input required="" placeholder="" type="text" class="input" name="last_name">
+                    <span>Lastname</span>
+                </label>
+            </div>
+            <label>
+                <input required="" placeholder="" type="text" class="input" name="username">
+                <span>Username</span>
+            </label>   
+                    
+            <label>
+                <input required="" placeholder="" type="email" class="input" name="email">
+                <span>Email</span>
+            </label> 
+                
+            <label>
+                <input required="" placeholder="" type="password" class="input" name="password">
+                <span>Password</span>
+            </label>
+            <label>
+                <input required="" placeholder="" type="password" class="input" name="cpassword">
+                <span>Confirm password</span>
+            </label>
+            <input type="submit" value="Submit" class="submit">
+
+            <p class="signin">Already have an acount ? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+
+   
+
+    {% if messages %}
+        {% for i in messages %}
+        
+        <script>
+             alertify.set('notifier','position', 'top-right');
+             alertify.warning('{{i}}');
+        </script>
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>

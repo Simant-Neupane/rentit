@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+     <!-- banner section start -->
+   <div class="banner_section layout_padding">
+    <div class="container">
+       <div id="main_slider" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+             <div class="carousel-item active">
+                <div class="row">
+                   <div class="col-sm-5 mt-auto">
+                     <div class="book_room">
+                        <h1>Search for location</h1>
+                        <form class="book_now" method="post">
+                           {% csrf_token %}
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <span>Arrival</span>
+                                 <input class="online_book" placeholder="Search for location" type="text" name="location">
+                              </div>
+                              <div class="col-md-12">
+                                 <button class="book_btn">Search Now</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                   </div>
+                   <div class="col-1"></div>
+                   <div class="col-sm-6">
+                      <div class="banner_title">
+                         <h1 class="outstanding_text" style="color: white;"><b style="color: #050505;">R</b>entIt</h1>
+                         <h1 class="coffee_text" >Rent your home. <br>  Own your life. <br> Start of something great.</h1>
+                         
+                        {% if request.user.profile.role == 'owner' %}
+                        <a href=""><button class="btn btn-lg btn-light rounded-pill mt-3 booknow"> LEAVE NOW </button></a>
+                        {% else %}
+                        <a href=""><button class="btn btn-lg btn-light rounded-pill mt-3 booknow"> BOOK NOW </button></a>
+                        {% endif %}
+                      </div>
+                   </div>
+                </div>
+             </div>
+
+          </div>
+          
+       </div>
+    </div>
+ </div>
+ <!-- banner section end -->
+
+      <!-- about section start -->
+      <div class="about">
+        <div class="container-fluid">
+           <div class="row">
+              <div class="col-md-5 py-3">
+                 <div class="titlepage">
+                    <h2>About Us</h2>
+                    <p>The passage experienced a surge in popularity during the 1960s when Letraset 
+                     used it on their dry-transfer sheets, and again during the 90s as desktop publishers 
+                     bundled the text with their software. Today it's seen all around the web; on templates,
+                      websites, and stock designs. Use our generator to get your own, or read on for the 
+                      authoritative history of lorem ipsum. </p>
+                    <a class="read_more" href="{% url 'about' %}"> Read More</a>
+                 </div>
+              </div>
+              <div class="col-md-7">
+                 <div class="about_img">
+                    <figure><img src="{% static 'images/room5.jpg' %}" alt="#"/></figure>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- about section end -->
+     <!-- our rooms section start -->
+      <div class="main" id="rent">
+         <h2 class="text-center pt-4">Properties for Rent</h2>
+         <!-- From Uiverse.io by alexmaracinaru -->
+         <div class="ms-5 pt-3 pb-5 row">
+            {% for property in page_obj %}
+            {% if property.category_id == 1 %}
+            <div class="col-4 property">
+               <div class="card" style="width: 20rem;">
+
+                  {% if property.image or property.images.all %}
+                     <div class="card-image">
+                     <div id="carousel-{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+
+                           {% if property.image %}
+                           <div class="carousel-item active">
+                           <img src="{{property.image.url}}" class="img-fluid" alt="Main image">
+                           </div>
+                           {% endif %}
+
+                           {% for i in property.images.all %}
+                           <div class="carousel-item {% if not property.image and forloop.first %}active{% endif %}">
+                           <img src="{{i.image.url}}" class="img-fluid" alt="Additional image">
+                           </div>
+                           {% endfor %}
+
+                        </div>
+
+                        <!-- Optional controls -->
+                         {% if property.images.all %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Next</span>
+                        </button>
+                        {% endif %}
+                     </div>
+                     </div>
+                  {% endif %}
+
+                  <div class="category">{{property.perportyType}} </div>
+                  <div class="heading">
+                     <span id="short-{{ property.id }}">
+                        {{ property.disc|slice:":10" }}...
+                        <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see more</a>
+                     </span>
+                  
+                     <span id="full-{{ property.id }}" style="display: none;">
+                        {{ property.disc }}
+                        <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see less</a>
+                     </span>
+                  
+                     <a href="{% url 'details' property.id %}">
+                        <button class="btn btn-dark">More details</button>
+                     </a>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <nav aria-label="Page navigation example">
+               <ul class="pagination">
+                  {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}#rent">Previous</a></li>
+                  {% endif %}
+                  {% for i in num %}
+                 <li class="page-item"><a class="page-link" href="?page={{i}}#rent">{{i}}</a></li>
+                 {% endfor %}
+                 {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}}#rent">Next</a></li>
+                  {% endif %}
+               </ul>
+             </nav>
+            
+         </div>
+      </div>
+      <hr>
+      <div class="main" id="sale">
+         <h2 class="text-center pt-4">Properties for Sale</h2>
+         <!-- From Uiverse.io by alexmaracinaru -->
+         <div class="ms-5 pt-3 pb-5 row">
+            {% for property in page_obj2 %}
+            {% if property.category_id == 2 %}
+            <div class="col-4 property">
+               <div class="card" style="width: 20rem;">
+                  {% if property.image or property.images.all %}
+                     <div class="card-image">
+                     <div id="carousel-{{ property.id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+
+                           {% if property.image %}
+                           <div class="carousel-item active">
+                           <img src="{{property.image.url}}" class="img-fluid" alt="Main image">
+                           </div>
+                           {% endif %}
+
+                           {% for i in property.images.all %}
+                           <div class="carousel-item {% if not property.image and forloop.first %}active{% endif %}">
+                           <img src="{{i.image.url}}" class="img-fluid" alt="Additional image">
+                           </div>
+                           {% endfor %}
+
+                        </div>
+
+                        <!-- Optional controls -->
+                        {% if property.images.all %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="prev">
+                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ property.id }}" data-bs-slide="next">
+                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                           <span class="visually-hidden">Next</span>
+                        </button>
+                        {% endif %}
+                     </div>
+                     </div>
+                  {% endif %}
+                  <div class="category">{{property.perportyType}} </div>
+                  <div class="heading">
+                     <span id="short-{{ property.id }}">
+                        {{ property.disc|slice:":10" }}...
+                        <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see more</a>
+                     </span>
+                  
+                     <span id="full-{{ property.id }}" style="display: none;">
+                        {{ property.disc }}
+                        <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see less</a>
+                     </span>
+                  
+                     <a href="{% url 'details' property.id %}">
+                        <div class="author">See more details</div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <nav aria-label="Page navigation example">
+               <ul class="pagination">
+                  {% if page_obj2.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page2={{page_obj2.previous_page_number}}#sale">Previous</a></li>
+                  {% endif %}
+                  {% for i in num2 %}
+                 <li class="page-item"><a class="page-link" href="?page2={{i}}#sale">{{i}}</a></li>
+                 {% endfor %}
+                 {% if page_obj2.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page2={{page_obj2.next_page_number}}#sale">Next</a></li>
+                  {% endif %}
+               </ul>
+             </nav>
+         </div>
+      </div>
+     <!-- our rooms section end -->
+     <script>
+      function toggleDescription(id) {
+        const shortText = document.getElementById(`short-${id}`);
+        const fullText = document.getElementById(`full-${id}`);
+    
+        if (shortText.style.display === 'none') {
+          shortText.style.display = 'inline';
+          fullText.style.display = 'none';
+        } else {
+          shortText.style.display = 'none';
+          fullText.style.display = 'inline';
+        }
+      }
+    </script>
+    
+{% endblock content %}

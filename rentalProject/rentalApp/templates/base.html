@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <!-- bootstrap cdn link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <!-- fontawasome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- favicon link  -->
+     <link rel="icon" href="{%static 'favicon_io/favicon.ico'%}">
+
+     <!-- custom css link -->
+     <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+     <link rel="stylesheet" href="{% static 'css/uploadform.css' %}">
+     <link rel="stylesheet" href="{% static 'css/details.css' %}">
+
+</head>
+<body>
+        <nav class="navbar navbar-expand-lg bg-body-secondary">
+            <div class="container-fluid">
+              <a class="navbar-brand fs-4 fw-bold" href="{% url 'index' %}"><img src="{% static 'favicon_io/favicon-32x32.png' %}" alt="">entIt</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll">
+                  <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %} nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="{% if request.resolver_match.url_name == 'for_rent' %}active{% endif %} nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'for_rent' %}">For Rent</a>
+                  </li>
+                  <li class="{% if request.resolver_match.url_name == 'for_sale' %}active{% endif %} nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'for_sale' %}">For Sale</a>
+                  </li>
+                  <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %} nav-item">
+                    <a class="nav-link active" href="{% url 'about' %}">About</a>
+                  </li>
+                </ul>
+
+                <div class="d-flex align-items-center">
+                {% if request.user.is_authenticated %}
+                
+                <div class="dropdown me-5">
+                  <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {% if request.user.profile.image %}
+                    <img src="{{request.user.profile.image.url}}" width="40px" height="40px" style="border-radius: 50%;" alt=""> 
+                    {% else %}
+                    <img src="{% static 'images/avatar.jpg' %}" width="40px" height="40px" style="border-radius: 50%;" alt=""> 
+                    {% endif %}
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{%url 'profile'%}">Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="{%url 'logout'%}">Logout</a></li>
+                  </ul>
+                </div>
+                {% else %}
+                  <a href="{% url 'login' %}"><button class="btn btn-outline-dark">Login</button></a>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+          </nav>
+    {% block content %}
+    
+    {% endblock content %}
+          <!-- footer section start -->
+    <div class="footer_section layout_padding"> 
+        <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6">
+            <h3 class="useful_text"><img src="{% static 'favicon_io/favicon-32x32.png' %}" alt="">entIt</h3>
+            <div class="footer_menu">
+                <ul>
+                <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}">Home</a></li>
+                <li class="{% if request.resolver_match.url_name == 'about' %}active{% endif %}"><a href="{% url 'about' %}">About Us</a></li>
+                <li class="{% if request.resolver_match.url_name == 'for_rent' %}active{% endif %}"><a href="{% url 'for_rent' %}">Gallery</a></li>
+                <li class=""><a href="{% url 'about' %}#services">Our Services</a></li>
+                <li class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}"><a href="{% url 'contact' %}">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="useful_text">Legals</h3>
+                <div class="footer_menu">
+                    <ul>
+                    <li><a href="">Terms and conditions</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <li><a href="">Policy</a></li>
+                    <li><a href="">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <h1 class="useful_text">Contact Us</h1>
+                <div class="location_text">
+                    <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i><span class="padding_left_10">Address :
+                                Sankhamul, New Baneshwor</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+9779807585264" target="_blank">
+                            <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">Call :
+                                +9779807585264</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://mail.google.com/mail/?view=cm&to=iamsimant24@gmail.com" target="_blank">
+                            <i class="fa fa-envelope" aria-hidden="true"></i><span class="padding_left_10">Email :
+                                iamsimant24@gmail.com</span>
+                        </a>
+                    </li>
+                    <div class="icon_ho gap-3 my-3">
+
+                        <a href="https://www.facebook.com/" target="_blank"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="FaceBook" class="fb">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/sketch_it03/" target="_blank"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Instagram" class="instagram">
+                            <i class="fa-brands fa-instagram mx-3"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/" target="_blank"
+                            data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="TikTok" class="tiktok">
+                            <i class="fa-brands fa-tiktok"></i>
+                        </a>
+                    </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+ <!-- footer section end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>

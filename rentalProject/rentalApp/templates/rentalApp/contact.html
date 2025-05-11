@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text-center text-light bg-secondary py-3">CONTACT US</h1>
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form id="request" method="post" class="main_form">
+                {% csrf_token %}
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <input class="contactus" placeholder="Name" type="type" name="name"> 
+                    </div>
+                    <div class="col-12">
+                        <input class="contactus" placeholder="Email" type="type" name="email"> 
+                    </div>
+                    <div class="col-12">
+                        <input class="contactus" placeholder="Phone Number" type="type" name="phone">                          
+                    </div>
+                    <div class="col-12">
+                        <textarea class="textarea" placeholder="Message" type="type" Message="Name" name="message">Message</textarea>
+                    </div>
+                    <div class="col-12">
+                        <button class="send_btn">Send</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <div class="map_main">
+                <div class="map-responsive">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d418.0550142104681!2d85.33138051853358!3d27.683563567950912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19bf76e14d7b%3A0xaa52a92d6f373329!2sM8MJ%2B8JC%2C%20Kathmandu%2044600!5e0!3m2!1sen!2snp!4v1746612003856!5m2!1sen!2snp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
