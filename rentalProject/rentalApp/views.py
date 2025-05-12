@@ -8,7 +8,9 @@ from .form import UserRegisterForm,ProfileForm,PropertyUpload
 from .models import Profile,Property,PropertyImage, PerportyType, Contact
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -100,8 +102,15 @@ def contact(request):
 
         contact = Contact.objects.create(name=name,email=email,phone=phone,message=message)
         contact.save()
-        messages.success(request,'Thank You!')
-        return redirect('index')
+        subject= "Welcome to RentIt"
+        message= render_to_string('rentalApp/email_message.html',{'name':name,'email':email,'phone':phone,'message':message,'date':datetime.now()})
+        from_email= "iamsimant24@gmail.com"
+        recipient_list= [email,"iamsimant24@gmail.com"]
+
+        send_mail(subject,message,from_email,recipient_list,fail_silently=False)
+        messages.success(request,'Thank You! Your message have been received.')
+
+        return redirect('contact')
     return render(request,'rentalApp/contact.html')
 
 def rent_details(request,id):

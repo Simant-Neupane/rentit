@@ -38,5 +38,13 @@
     </div>
 </div>
 
-
+    {% if messages %}
+        {% for i in messages %}
+        
+        <script>
+             alertify.set('notifier','position', 'top-right');
+             alertify.success('{{i}}');
+        </script>
+        {% endfor %}
+    {% endif %}
 {% endblock content %}

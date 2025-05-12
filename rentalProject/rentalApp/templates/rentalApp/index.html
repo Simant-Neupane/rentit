@@ -250,5 +250,13 @@
         }
       }
     </script>
-    
+    {% if messages %}
+        {% for i in messages %}
+        
+        <script>
+             alertify.set('notifier','position', 'top-right');
+             alertify.warning('{{i}}');
+        </script>
+        {% endfor %}
+    {% endif %}
 {% endblock content %}
