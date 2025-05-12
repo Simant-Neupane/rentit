@@ -47,31 +47,6 @@
     </div>
  </div>
  <!-- banner section end -->
-
-      <!-- about section start -->
-      <div class="about">
-        <div class="container-fluid">
-           <div class="row">
-              <div class="col-md-5 py-3">
-                 <div class="titlepage">
-                    <h2>About Us</h2>
-                    <p>The passage experienced a surge in popularity during the 1960s when Letraset 
-                     used it on their dry-transfer sheets, and again during the 90s as desktop publishers 
-                     bundled the text with their software. Today it's seen all around the web; on templates,
-                      websites, and stock designs. Use our generator to get your own, or read on for the 
-                      authoritative history of lorem ipsum. </p>
-                    <a class="read_more" href="{% url 'about' %}"> Read More</a>
-                 </div>
-              </div>
-              <div class="col-md-7">
-                 <div class="about_img">
-                    <figure><img src="{% static 'images/room5.jpg' %}" alt="#"/></figure>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-     <!-- about section end -->
      <!-- our rooms section start -->
       <div class="main" id="rent">
          <h2 class="text-center pt-4">Properties for Rent</h2>
@@ -207,7 +182,7 @@
                      </span>
                   
                      <a href="{% url 'details' property.id %}">
-                        <div class="author">See more details</div>
+                        <button class="btn btn-dark">More details</button>
                      </a>
                   </div>
                </div>
@@ -230,6 +205,37 @@
          </div>
       </div>
      <!-- our rooms section end -->
+      <!-- about section start -->
+      <div class="about">
+        <div class="container-fluid">
+           <div class="row">
+              <div class="col-5">
+                 <div class="titlepage">
+                    <h2>About Us</h2>
+                    <p>
+                        Welcome to <span class="text-dark fw-bold">RentIt</span> - your trusted platform for 
+                        finding and renting the perfect home. Whether you're 
+                        looking for a cozy apartment, a spacious family house, or 
+                        a short-term vacation rental, we've got you covered.<br>
+                        Our mission is to make house hunting easy, transparent, and 
+                        secure. With user-friendly tools, verified listings, and a growing 
+                        community of landlords and tenants, we help you find a place that 
+                        truly feels like home.<br>
+                        At <span class="text-dark fw-bold">RentIt</span>, we believe in simplicity, trust, and convenience. Start
+                        your journey with us today - your next home is just a few clicks away. 
+                     </p>
+                    <a class="read_more mb-4" href="{% url 'about' %}"> Read More</a>
+                 </div>
+              </div>
+              <div class="col-md-7">
+                 <div class="about_img mt-5">
+                    <figure><img src="{% static 'images/room5.jpg' %}" alt="#"/></figure>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     <!-- about section end -->
      <script>
       function toggleDescription(id) {
         const shortText = document.getElementById(`short-${id}`);

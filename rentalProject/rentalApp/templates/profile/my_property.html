@@ -51,10 +51,18 @@
                      {{ property.disc }}
                      <a href="#" style="font-size: 17px;" onclick="toggleDescription({{property.id}}); return false;">see less</a>
                   </span>
+                  
                
                   <div>
-                     <a href="{% url 'propertyedit' property.id %}"><button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></button></a>
-                     <a href="{% url 'propertydelete' property.id %}"><button class="btn btn-info"><i class="fa-solid fa-trash"></i></button></a>
+                     <a href="{% url 'details' property.id %}">
+                        <button class="btn btn-dark">More details</button>
+                     </a>
+                     <a href="{% url 'propertyedit' property.id %}">
+                        <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i></button>
+                     </a>
+                     <a href="{% url 'propertydelete' property.id %}">
+                        <button class="btn btn-info"><i class="fa-solid fa-trash"></i></button>
+                     </a>
                   </div>
                </div>
             </div>

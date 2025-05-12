@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  .privacy {
+    margin: 50px;
+  }
+  h1, h2 {
+    color: #2c3e50;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+</style>
+
+<div class="privacy">
+  <h1>Privacy Policy</h1>
+  <p><strong>Effective Date:</strong> <span id="effective-date"></span></p>
+
+  <section>
+    <h2>1. Overview</h2>
+    <p>RentIt is committed to protecting your privacy. This policy explains how we collect, use, and secure your information.</p>
+  </section>
+
+  <section>
+    <h2>2. Information We Collect</h2>
+    <p>We may collect the following:</p>
+    <ul>
+      <li>Basic contact information (e.g., name, email)</li>
+      <li>Property details and preferences</li>
+      <li>Usage and interaction data (e.g., IP address, browser type)</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. How We Use Information</h2>
+    <p>We use your data to:</p>
+    <ul>
+      <li>Provide and improve our platform</li>
+      <li>Enable secure communication between users</li>
+      <li>Send important updates and support communications</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Third-Party Access</h2>
+    <p>We do not sell your data. Some trusted third-party services may access limited data to support features like payment processing or hosting.</p>
+  </section>
+
+  <section>
+    <h2>5. Cookies</h2>
+    <p>We may use cookies to enhance user experience and analyze platform performance. You can manage cookie preferences through your browser settings.</p>
+  </section>
+
+  <section>
+    <h2>6. Data Security</h2>
+    <p>We implement technical and organizational measures to protect your data. However, no system is fully immune to risks.</p>
+  </section>
+
+  <section>
+    <h2>7. Your Rights</h2>
+    <p>You can request access, correction, or deletion of your data by contacting us at <a href="mailto:iamsimant24@gmail.com">iamsimant24@gmail.com</a>.</p>
+  </section>
+
+  <section>
+    <h2>8. Policy Changes</h2>
+    <p>We may revise this policy at any time. Your continued use of RentIt after changes constitutes agreement to the updated policy.</p>
+  </section>
+
+  <section>
+    <h2>9. Contact</h2>
+    <p>If you have questions about our privacy practices, reach us at <a href="mailto:iamsimant24@gmail.com">iamsimant24@gmail.com</a></p>
+  </section>
+</div>
+
+<script>
+  const dateElement = document.getElementById('effective-date');
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  dateElement.textContent = today.toLocaleDateString(undefined, options);
+</script>
+{% endblock content %}

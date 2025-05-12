@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  .privacy {
+    margin: 50px;
+  }
+  h1, h2 {
+    color: #2c3e50;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  section {
+    margin-bottom: 2rem;
+  }
+</style>
+
+<div class="privacy">
+  <h1>Terms and Conditions</h1>
+  <p><strong>Effective Date:</strong> <span id="effective-date"></span></p>
+
+  <section>
+    <h2>1. Introduction</h2>
+    <p>Welcome to RentIt. By using our platform, you agree to comply with these Terms and any applicable laws.</p>
+  </section>
+
+  <section>
+    <h2>2. Account Registration</h2>
+    <p>To list or book properties, you must create an account. You are responsible for safeguarding your credentials and all activity under your account.</p>
+  </section>
+
+  <section>
+    <h2>3. Property Listings</h2>
+    <ul>
+      <li>All listings must be accurate and not misleading.</li>
+      <li>Only the legal owner or authorized agent may post rental properties.</li>
+      <li>We reserve the right to remove any content that violates our guidelines.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. Booking and Interactions</h2>
+    <p>RentIt facilitates communication between renters and property owners but does not intervene in agreements or disputes. Users are advised to verify listings independently before transacting.</p>
+  </section>
+
+  <section>
+    <h2>5. Payments</h2>
+    <p>Any transactions facilitated through RentIt use third-party services. We do not hold funds or process payments directly.</p>
+  </section>
+
+  <section>
+    <h2>6. User Conduct</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Submit false or illegal information</li>
+      <li>Disrupt or interfere with the platform's operation</li>
+      <li>Violate others’ rights or post discriminatory content</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>7. Suspension and Termination</h2>
+    <p>We may suspend or terminate your account if you breach these Terms, misuse the platform, or engage in fraudulent activity.</p>
+  </section>
+
+  <section>
+    <h2>8. Liability Disclaimer</h2>
+    <p>RentIt is not liable for any damages, losses, or claims arising from your use of the platform, including financial transactions or rental agreements.</p>
+  </section>
+
+  <section>
+    <h2>9. Policy Updates</h2>
+    <p>We may update these Terms without prior notice. Your continued use of RentIt implies agreement to the current version.</p>
+  </section>
+
+  <section>
+    <h2>10. Contact Us</h2>
+    <p>Email: <a href="mailto:iamsimant24@gmail.com">iamsimant24@gmail.com</a></p>
+  </section>
+</div>
+
+<script>
+  const dateElement = document.getElementById('effective-date');
+  const today = new Date();
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  dateElement.textContent = today.toLocaleDateString(undefined, options);
+</script>
+{% endblock content %}

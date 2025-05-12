@@ -108,7 +108,12 @@ def rent_details(request,id):
     property = get_object_or_404(Property, id=id)
     return render(request,'rentalApp/rent_details.html',{'property':property})
 
-from django.contrib.auth.decorators import login_required
+def terms(request):
+    return render(request,'rentalApp/terms.html')
+
+def privacy(request):
+    return render(request,'rentalApp/privacy.html')
+
 
 @login_required(login_url='login')
 def upload_property(request):
